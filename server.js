@@ -24,3 +24,5 @@ app.listen(port,()=>console.log(`your server is started on ${port}`))
 
 
 // mongodb+srv://rohitk7065:<password>@cluster0.pekle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+

@@ -15,10 +15,11 @@ const { route } = require('./user');
 // %access private
 router.get('/me',auth,async(req,res)=>{
     try{
-        const profile=await Profile.findOne({user:req.user.id})
-        .populate('user',['name','avatar']);
+        // const profile=await Profile.findOne({user:req.user.id})
+        // .populate('user',['name','avatar']);
+        const profile = await Profile.findOne({user:req.user.id}).populate('user',['name','avatar']);  
 
-        if (! profile){
+        if (!profile){
             return res.status(400).json({msg:'there is no profile....'})
 
         }
@@ -133,12 +134,12 @@ router.get('/',async(req,res)=>{
 
 router.get('/user/:user_id',async(req,res)=>{
     try {
-        const profile = await Profile.findOne({user:req.params.user_id}).populate('user',['name','avatar'])
+        const profile = await Profile.findOne({user:req.params.user_id}).populate('user',['name','avatar']) ;
 
         if(!profile){
             return res.status(400).json({msg:'there is no profile for this user'})
         }
-        res.json(profiles)
+        res.json(profile)
     } catch (err) {
         console.log(err.message)
         if (err.kind == ObjectId){
@@ -159,12 +160,14 @@ router.delete('/',auth,async(req,res)=>{
 
         await User.findOneAndRemove({_id:req.user.id})
         res.json({msg:"user removed"})
-    } catch (error) {
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
         
     }
 })
 
-// upadte the current profile
+// upadte the current exprerience
 
 router.put('/experience',[auth,
     [
@@ -199,16 +202,14 @@ router.put('/experience',[auth,
         }
 
         try {
-            const profile =await Profile.findOne({user:req.user.id})
-            profile.experience.unshift(newExp)
-
-            await profile.save()
-            res.json(profile)
+            const profile = await Profile.findOne({user:req.user.id});
+            profile.experience.unshift(newExp);
+    
+            await profile.save();
+            res.json(profile);  
         } catch (err) {
             console.error(err.message)
-            res.status(500).send('server error')
-
-            
+            res.status(500).send('server error') 
         }
     })
 
@@ -290,11 +291,10 @@ router.delete('/education/:edu_id',auth,async(req,res)=>{
 
 router.get('github/:username',(req,res)=>{
     try {
-        const option={
-            uri:`https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}
-            &client_secret=${config.get('githubSecret')}`,
+        const options ={
+            uri : `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
             method:'GET',
-            header:{'user-agent':'node.js'}
+            headers:{'user-agent':'node.js'}
         };
         request (options,(error,response,body)=>{
             if (error) console.error(error);
@@ -309,9 +309,7 @@ router.get('github/:username',(req,res)=>{
     } catch (err) {
         console.error(err.message)
         res.status(500).send('server error')
-        
     }
-
 })
 
 module.exports=router
