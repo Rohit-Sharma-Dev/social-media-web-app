@@ -1,7 +1,7 @@
 const express=require('express')
 const connectDb=require('./config/db.js');
 const app =express()
-const port = 1100
+const port = 1000
 
 // connect database
 connectDb();
