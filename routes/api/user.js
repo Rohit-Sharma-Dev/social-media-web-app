@@ -7,7 +7,7 @@ const config=require('config')
 const { check,validationResult}=require('express-validator')
 const User=require('../../models/User') 
 
-// %route post/api/user
+// %route post/api/users
 // %desc register user
 // %access public 
 
