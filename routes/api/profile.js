@@ -6,7 +6,7 @@ const User=require('../../models/User')
 const request=require('request')
 const config=require('config')
 
-const { check,validationResult}=require('express-validator/check')
+const { check,validationResult}=require('express-validator')
 const profile = require('../../models/profile');
 const { route } = require('./user');
 
