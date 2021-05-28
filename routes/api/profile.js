@@ -74,7 +74,7 @@ router.post('/',[auth,[
     if (status) profileFeilds.status=status
     if (githubusername) profileFeilds.githubusername=githubusername
     if (skills) {
-        profileFeilds.skills=skills.split(',').map(skill=>skill.trim())
+        profileFeilds.skills=skills.split(",").map((skill)=>skill.trim())
     }
     // console.log(profileFeilds.skills)
     // res.send('hello user')
@@ -95,7 +95,7 @@ try{
 
     if(profile){
         profile=await Profile.findOneAndUpdate(
-            { user:user.req.id},
+            { user:User.req.id},
             {$set:profileFeilds},
             {new:true}
         );
@@ -110,7 +110,7 @@ try{
 }
 catch (err){
     console.error(err.message)
-    res.status(500).send('server error....!')
+    res.status(500).send('server error....suhdsuhguigteyigeyufeteutuef!')
 }
 })
 // %route get api/profile

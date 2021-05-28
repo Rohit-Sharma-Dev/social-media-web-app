@@ -1,8 +1,9 @@
 import React ,{useEffect}from 'react'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Spinner from '../layout/Spinner'
 import {Link} from 'react-router-dom'
+import DashboardActions from './DashboardActions'
 
 import {getCurrentProfile} from '../../actions/profile'
 import { Fragment } from 'react'
@@ -11,7 +12,7 @@ const Dashboard = ({getCurrentProfile,auth:{ user}, profile:{profile,loading}}) 
 
     useEffect(()=>{
         getCurrentProfile()
-    },[])
+    },[getCurrentProfile])
 
     return (loading && profile === null ? <Spinner/> :
     <Fragment>
@@ -21,16 +22,16 @@ const Dashboard = ({getCurrentProfile,auth:{ user}, profile:{profile,loading}}) 
         </p>
         {profile !== null ? (
             <Fragment>
-                has
+                <DashboardActions/>
             </Fragment>
         ):(
             <Fragment> 
                 <p>
                     you have not setup any profile upto yet
                 </p>
-                <link to='/create-profile' className="btn btn-primary my-1">
+                <Link to='/create-profile' className="btn btn-primary my-1">
                     Create Profile
-                </link>
+                </Link>
             </Fragment>
 
         )}
@@ -39,9 +40,9 @@ const Dashboard = ({getCurrentProfile,auth:{ user}, profile:{profile,loading}}) 
 }
 
 Dashboard.propTypes = {
-    getCurrentProfile:PropTypes.func.isRequired,
-    auth:PropTypes.object.isRequired,
-    profile:PropTypes.object.isRequired,
+    getCurrentProfile:propTypes.func.isRequired,
+    auth:propTypes.object.isRequired,
+    profile:propTypes.object.isRequired,
 }
 
 const mapStateToProps=state => ({
