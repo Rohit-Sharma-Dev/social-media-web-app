@@ -1,6 +1,9 @@
 const express=require('express')
 const connectDb=require('./config/db.js');
+const cors=require('cors')
+
 const app =express()
+app.use(cors())
 
 
 // connect database
@@ -21,6 +24,6 @@ app.use('/api/profile',require('./routes/api/profile'))
 app.use('/api/post',require('./routes/api/post'))
 
 
-const port = 1100
+const port = 8000
 app.listen(port,()=>console.log(`your server is started on ${port}`))
 
