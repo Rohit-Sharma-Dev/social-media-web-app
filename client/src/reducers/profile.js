@@ -1,40 +1,56 @@
-import {GET_PROFILE,PROFILE_ERROR,CLEAR_PROFILE,UPDATE_PROFILE} from '../actions/types'
+import { GET_PROFILE,
+     PROFILE_ERROR,
+    CLEAR_PROFILE,
+    UPDATE_PROFILE,
+    GET_PROFILES,
+    GET_REPOS
+} from '../actions/types';
 
-const intialState={
+const initialState = {
     profile:null,
-    profiles:[],
-    repos:[],
-    loading:true,
-    error:{}
+    profiles: [],
+    repos: [],
+    loading: true,
+    error: {}
 }
-
-export default  ( state=intialState,action)=>{
-
-    const{type,payload}=action;
-
-    switch(type){
+// ki
+export default (state = initialState, action) => {
+    const { type, payload } = action;
+    
+    switch (type) {
         case GET_PROFILE:
         case UPDATE_PROFILE:
+            return { 
+                ...state,
+                profile: payload,
+                loading: false
+            }
+        case GET_PROFILES:
             return {
                 ...state,
-                profile:payload,
-                loading:false
+                profiles: payload,
+                loading: false
             }
         case PROFILE_ERROR:
             return {
                 ...state,
-                error:payload,
-                loading:false
+                error: payload,
+                loading: false
             }
         case CLEAR_PROFILE:
-            return{
+           return {
+               ...state,
+               profile: null,
+               repos: [],
+               loading:false
+        }
+        case GET_REPOS:
+            return {
                 ...state,
-                profile:null,
-                repos:[],
-                loading:false
+                repos: payload,
+                loading: false
             }
-        default: 
+        default:
             return state
     }
-
 }

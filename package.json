@@ -1,7 +1,7 @@
 {
-  "name": "social-media-web-app",
+  "name": "social_media_app",
   "version": "1.0.0",
-  "description": "place for communication ",
+  "description": "social network for developers",
   "main": "server.js",
   "scripts": {
     "start": "node server",
@@ -9,18 +9,9 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rohitk7065/social-media-web-app.git"
-  },
-  "author": "rohit",
+  "author": "sonu shakya",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rohitk7065/social-media-web-app/issues"
-  },
-  "homepage": "https://github.com/rohitk7065/social-media-web-app#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "cors": "^2.8.5",

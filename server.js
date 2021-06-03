@@ -1,29 +1,25 @@
-const express=require('express')
-const connectDb=require('./config/db.js');
-const cors=require('cors')
+const express = require('express');
 
-const app =express()
+const cors = require('cors')
+const connectDB = require('./config/db')
+const app = express();
+
 app.use(cors())
 
+connectDB();
 
-// connect database
-connectDb();
+app.use(express.json({ extended: false }));
 
-// middleware
+app.get('/', (req, res) => res.send(`API is running succesfully`));
 
-app.use(express.json({extended:false }))
+app.use('/api/users', require('./routes/api/users'));
 
-// general calling of a server
-app.get('/',(req,res)=>res.send("api runing........"))
+app.use('/api/post', require('./routes/api/posts'));
 
-// call other router
+app.use('/api/auth', require('./routes/api/auth'));
 
-app.use('/api/user',require('./routes/api/user'))
-app.use('/api/auth',require('./routes/api/auth'))
-app.use('/api/profile',require('./routes/api/profile'))
-app.use('/api/post',require('./routes/api/post'))
+app.use('/api/profile', require('./routes/api/profile'));
 
+const PORT = process.env.PORT || 4000;
 
-const port = 8000
-app.listen(port,()=>console.log(`your server is started on ${port}`))
-
+app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
