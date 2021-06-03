@@ -4,6 +4,8 @@ import { Spinner } from '../layout/Spinner'
 import ProfileItems from './ProfileItems'
 import { connect } from 'react-redux'
 import {getProfiles} from '../../actions/profile'
+
+
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
     useEffect(() => {
         getProfiles();
