@@ -1,6 +1,6 @@
-{
-    "mongoURL": "mongodb+srv://1234:1234@devconnector.nm3ps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "jwtSecret":"rohit1234",
-    "githubclientid":"47d052ea82fba5e6a361",
-    "githubsecret":"aaac254e4d438043936b4b50ccd73f66fef89d71"
+
+{"mongoURI": "mongodb+srv://1234:1234@devconnector.nm3ps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtsecret":"rohit1234",
+    "githubClientId":"068777584b746651f0cb",
+    "githubSecret":"0c6d25704daa4701848087d19e070bcba14d1647"
 }
